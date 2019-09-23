@@ -3,6 +3,8 @@ import {useState} from "react";
 
 export  const useForm = (initialValues) => {
 
+  //custom hook just handles the forms with the name attribute given to the input field
+
   const [values, setValues] = useState(initialValues)
 
   return [
