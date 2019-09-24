@@ -7,7 +7,7 @@ const Effect = () => {
           console.log("render");
 
           return () => {   //this is called a clean up function basically componentDidUnMount
-            console.log("unmount");
+            console.clear();
           };
         }, []);  // this array determines when the useEffect function should be called
 

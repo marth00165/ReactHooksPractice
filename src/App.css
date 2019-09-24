@@ -7,16 +7,78 @@
 }
 
 .App-header {
+  height: 100vh;
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
 .App-link {
   color: #09d3ac;
+}
+
+.useFetch {
+  width: 250px;
+  border-color: white;
+  border-style: solid;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.useEffect {
+  width: 250px;
+  border-color: white;
+  border-style: solid;
+  justify-content: center;
+  padding: 20px;
+}
+
+.useState {
+  justify-content: flex-end;
+  width: 250px;
+  border-color: white;
+  border-style: solid;
+  padding: 20px;
+}
+input[type=text], select {
+  color: black;
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=password], select {
+  color: black;
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+[type=submit] {
+  width: 60%;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+[type=submit]:hover {
+  background-color: #45a049;
+}
+.jawn {
+  color: black;
+  width: 200px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+
 }

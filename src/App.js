@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Effect from './Effect.js'
+import Form from './Form.js'
 import "./App.css";
-import {useForm} from "./useForm.js"
 import {useFetch} from "./useFetch.js"
 
 const URL = `http://numbersapi.com/`
@@ -20,9 +20,6 @@ const App = () => {
   // const [email, setEmail] = useState("")
   // const [password, setPassword] = useState("")
 
-  //This is how You use the custom Hook that you make
-
-  const [values, handleChange] = useForm({email: '', password: '', firstName: ''})
 
   /*
     The advantage over formik or custom handle submits is that you can use the one hook
@@ -31,7 +28,7 @@ const App = () => {
     Basically makes sharing logic easier
   */
 
-  const [showEffect, setEffect] = useState(true); // this is using state to render the component that uses effect to console log "render" or "unmount"
+  const [showEffect, setEffect] = useState(false); // this is using state to render the component that uses effect to console log "render" or "unmount"
 
   /*
     You Can Also add event listeners to useEffect
@@ -66,28 +63,27 @@ const App = () => {
   // you can use Effect to handle fetch requests and APIs with a custom hook
   const {data, loading} = useFetch(`${URL}/${count}/trivia`)
 
-
-
-
   return (
     <div className="App">
       <header className="App-header">
+      <div className="useFetch">
+        <h1>Use Fetch</h1>
+          <div>
+            {loading? 'loading...' : data}
+          </div>
+      </div>
 
-      <h1>Use Fetch</h1>
-        <div>
-          {loading? 'loading...' : data}
-        </div>
+      <div className= "useEffect">
+        <h1>Use Effect </h1>
+        <button onClick= {() => setEffect(!showEffect)}>Show/Unshow Effect </button>
 
-      <h1>Use Effect </h1>
-      <button onClick= {() => setEffect(!showEffect)}>Show/Unshow Effect </button>
+          {showEffect && <Effect/>}
 
-        {showEffect && <Effect/>}
+          <br/>
+          <br/>
+      </div>
 
-        <br/>
-        <br/>
-
-
-
+      <div className= "useState">
         <h1>Use State</h1>
           <div>
               Count1: {count}
@@ -97,12 +93,7 @@ const App = () => {
             </div>
           </div>
 
-        <div>
-          Email: <input value={values.email} onChange={handleChange}  name="email"/>
-          <br/>
-          First Name: <input value={values.firstName} onChange={handleChange}  name="firstName"/>
-          <br/>
-          Password: <input type="password" value={values.password} onChange={handleChange} name="password"/>
+          {showEffect && <Form/> }
         </div>
       </header>
     </div>
