@@ -20,7 +20,9 @@ const Form = () => {
 
 
     return(
-      <div className="jawn">
+      <div>
+        <h1>Use State</h1>
+        <div className="jawn">
         <form onSubmit={() => handleSubmit()}>
             <label> Email: </label>
             <br/>
@@ -37,6 +39,7 @@ const Form = () => {
           <button type = "submit" onClick={handleSubmit} > Submit </button>
         </form>
       </div>
+    </div>
     )
 }
 

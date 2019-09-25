@@ -7,14 +7,14 @@ const Effect = () => {
           console.log("render");
 
           return () => {   //this is called a clean up function basically componentDidUnMount
-            console.clear();
+            console.log("blah");
           };
         }, []);  // this array determines when the useEffect function should be called
 
 
     return(
       <div>
-      This is the Effect
+      use The up down keys or these buttons to navigate between different components!
       </div>
     )
 }

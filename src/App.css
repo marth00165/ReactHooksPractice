@@ -72,6 +72,17 @@ input[type=password], select {
 }
 
 [type=submit]:hover {
+  background-color: #FDC89E;
+}
+.refuseButton{
+  width: 60%;
+  background-color: #FCAA67;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.refuseButton:hover{
   background-color: #45a049;
 }
 .jawn {
@@ -81,4 +92,12 @@ input[type=password], select {
   background-color: #f2f2f2;
   padding: 20px;
 
+}
+
+.refuse {
+  color: white;
+  width: 200px;
+  border-radius: 5px;
+  background-color: #247BA0;
+  padding: 20px;
 }

@@ -1,10 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import Effect from './Effect.js'
 import Form from './Form.js'
+import Refuse from './Refuse.js'
 import "./App.css";
 import {useFetch} from "./useFetch.js"
 
 const URL = `http://numbersapi.com/`
+
+
+
+const componentArr = [<Form/>, <Refuse/>]
+const buttonArr = ["State", "Ref"]
+
+
 
 
 
@@ -14,6 +22,14 @@ const App = () => {
   const [count, setCount] = useState(() =>
     JSON.parse(localStorage.getItem("count"))
   )
+
+  // multiple states
+  const [arrCount, setarrCount] = useState(() =>
+    JSON.parse(localStorage.getItem("arrCount"))
+  )
+
+  const highlightedButton = document.getElementsByClassName(buttonArr[arrCount])
+
 
   //You can also use multiple Use States incase you want to handle all the objects at once
 
@@ -28,7 +44,7 @@ const App = () => {
     Basically makes sharing logic easier
   */
 
-  const [showEffect, setEffect] = useState(false); // this is using state to render the component that uses effect to console log "render" or "unmount"
+  // const [showEffect, setEffect] = useState(false); // this is using state to render the component that uses effect to console log "render" or "unmount"
 
   /*
     You Can Also add event listeners to useEffect
@@ -36,11 +52,17 @@ const App = () => {
 
   useEffect(() => {
     const onkeypress = e => {
-      if (e.code === "ArrowUp"){
-       setCount(c => c + 1)
+      if (e.code === "ArrowUp" && componentArr[arrCount-1]){
+        setarrCount(c => c - 1)
       }
-      else if (e.code === "ArrowDown") {
-        setCount(c => c - 1)
+      else if (e.code === "ArrowUp" && !componentArr[arrCount-1]) {
+        setarrCount(c => c = 1)
+      }
+      else if (e.code === "ArrowDown" && componentArr[arrCount+1]) {
+        setarrCount(c => c + 1)
+      }
+      else if (e.code === "ArrowDown" && !componentArr[arrCount+1]) {
+        setarrCount(c => c = 0)
       }
     }
     window.addEventListener("keydown", onkeypress)
@@ -49,7 +71,7 @@ const App = () => {
       window.removeEventListener("keydown", onkeypress)
 
     };
-  }, []);
+  }, [arrCount]);
 
   // You Can also have multiple useEffect functions
 
@@ -57,8 +79,9 @@ const App = () => {
   useEffect(() => {
 
     localStorage.setItem("count", JSON.stringify(count))
-
-  }, [count])
+    localStorage.setItem("arrCount", JSON.stringify(arrCount))
+     highlightedButton[0].setAttribute("style", "background:purple");
+  }, [count, arrCount])
 
   // you can use Effect to handle fetch requests and APIs with a custom hook
   const {data, loading} = useFetch(`${URL}/${count}/trivia`)
@@ -67,33 +90,36 @@ const App = () => {
     <div className="App">
       <header className="App-header">
       <div className="useFetch">
+      <div>
+          Count: {count}
+        <div>
+        Change what the api fetches by changing the numbers
+          <button onClick={() => setCount(c => c + 1)} > + </button>
+          <button onClick={() => setCount(c => c - 1)}> - </button>
+        </div>
+      </div>
         <h1>Use Fetch</h1>
           <div>
             {loading? 'loading...' : data}
           </div>
       </div>
 
+
       <div className= "useEffect">
         <h1>Use Effect </h1>
-        <button onClick= {() => setEffect(!showEffect)}>Show/Unshow Effect </button>
-
-          {showEffect && <Effect/>}
-
+        <Effect/>
           <br/>
           <br/>
+        <ul>
+          <li><button style={{textColor:"white"}} className="State" onClick={() => setarrCount(c => c = 0)}>useState</button></li>
+          <li><button style={{textColor:"white"}} className="Ref" onClick={() => setarrCount(c => c = 1)}>useRef</button></li>
+        </ul>
       </div>
 
       <div className= "useState">
-        <h1>Use State</h1>
-          <div>
-              Count1: {count}
-            <div>
-              <button onClick={() => setCount(c => c + 1)} > + </button>
-              <button onClick={() => setCount(c => c - 1)}> - </button>
-            </div>
-          </div>
-
-          {showEffect && <Form/> }
+          {/*!showEffect && <Refuse/>*/}
+           {/*showEffect && <Form/>*/ }
+        {componentArr[arrCount]}
         </div>
       </header>
     </div>
