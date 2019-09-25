@@ -28,8 +28,12 @@ const App = () => {
     JSON.parse(localStorage.getItem("arrCount"))
   )
 
-  const highlightedButton = document.getElementsByClassName(buttonArr[arrCount])
 
+
+  const buttonChanger = () => {
+    const highlightedButton = document.getElementsByClassName(buttonArr[arrCount])
+    highlightedButton[0].style.background = "#95F2D9";
+  }
 
   //You can also use multiple Use States incase you want to handle all the objects at once
 
@@ -80,8 +84,15 @@ const App = () => {
 
     localStorage.setItem("count", JSON.stringify(count))
     localStorage.setItem("arrCount", JSON.stringify(arrCount))
-     highlightedButton[0].setAttribute("style", "background:purple");
-  }, [count, arrCount])
+    buttonChanger()
+    const otherButtons = buttonArr.filter(button => {
+      if (button !== buttonArr[arrCount]) {
+        return button
+      }
+    })
+    otherButtons.map(button => document.getElementsByClassName(button)[0].style = null)
+
+  }, [count, arrCount, componentArr[arrCount]])
 
   // you can use Effect to handle fetch requests and APIs with a custom hook
   const {data, loading} = useFetch(`${URL}/${count}/trivia`)
@@ -110,7 +121,7 @@ const App = () => {
         <Effect/>
           <br/>
           <br/>
-        <ul>
+        <ul className= "list">
           <li><button style={{textColor:"white"}} className="State" onClick={() => setarrCount(c => c = 0)}>useState</button></li>
           <li><button style={{textColor:"white"}} className="Ref" onClick={() => setarrCount(c => c = 1)}>useRef</button></li>
         </ul>

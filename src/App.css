@@ -8,6 +8,7 @@
 
 .App-header {
   height: 100vh;
+  justify-content: center;
   background-color: #282c34;
   display: flex;
   font-size: calc(10px + 2vmin);
@@ -73,6 +74,9 @@ input[type=password], select {
 
 [type=submit]:hover {
   background-color: #FDC89E;
+}
+.list {
+  list-style-type: none;
 }
 .refuseButton{
   width: 60%;
